@@ -47,7 +47,7 @@ public class GravityCommand {
                     .then(argument("entities", EntityArgumentType.entities())
                             .executes(context -> executeRotate(context.getSource(), facingDirection, EntityArgumentType.getEntities(context, "entities")))));
 
-        dispatcher.register(literal("gravity").requires(source -> source.hasPermissionLevel(2))
+        dispatcher.register(literal("gravity").requires(source -> source.hasPermission(2))
                 .then(literal("get")
                         .executes(context -> executeGet(context.getSource(), context.getSource().getPlayer()))
                         .then(argument("entities", EntityArgumentType.entity())
