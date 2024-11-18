@@ -1,5 +1,6 @@
 package com.fusionflux.gravity_api.util;
 
+import com.fusionflux.gravity_api.GravityChangerMod;
 import com.fusionflux.gravity_api.config.GravityChangerConfig;
 import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
@@ -12,7 +13,7 @@ import net.minecraft.util.Identifier;
 public class GravityChangerComponents implements EntityComponentInitializer {
 
     public static final ComponentKey<GravityComponent> GRAVITY_MODIFIER =
-            ComponentRegistry.getOrCreate(new Identifier("gravity_api", "gravity_direction"), GravityComponent.class);
+            ComponentRegistry.getOrCreate(GravityChangerMod.id( "gravity_direction"), GravityComponent.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
