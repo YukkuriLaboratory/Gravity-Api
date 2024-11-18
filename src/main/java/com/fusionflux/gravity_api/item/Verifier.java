@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import org.quiltmc.qsl.networking.api.PacketByteBufs;
 
 public class Verifier {
-    public static Identifier FIELD_GRAVITY_SOURCE = new Identifier(GravityChangerMod.MOD_ID, "changer_item");
+    public static Identifier FIELD_GRAVITY_SOURCE = GravityChangerMod.id( "changer_item");
 
     public static boolean check(ServerPlayerEntity player, PacketByteBuf info, DefaultGravityPacket packet) {
 
