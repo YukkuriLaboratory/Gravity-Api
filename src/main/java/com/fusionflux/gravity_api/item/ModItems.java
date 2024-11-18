@@ -25,19 +25,23 @@ public abstract class ModItems {
     public static final Item GRAVITY_CHANGER_EAST_AOE = new GravityChangerItemAOE(new Item.Settings().maxCount(1), Direction.EAST);
 
     public static void init() {
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_down"), GRAVITY_CHANGER_DOWN);
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_up"), GRAVITY_CHANGER_UP);
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_north"), GRAVITY_CHANGER_NORTH);
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_south"), GRAVITY_CHANGER_SOUTH);
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_west"), GRAVITY_CHANGER_WEST);
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_east"), GRAVITY_CHANGER_EAST);
+        register( "gravity_changer_down", GRAVITY_CHANGER_DOWN);
+        register( "gravity_changer_up", GRAVITY_CHANGER_UP);
+        register( "gravity_changer_north", GRAVITY_CHANGER_NORTH);
+        register( "gravity_changer_south", GRAVITY_CHANGER_SOUTH);
+        register( "gravity_changer_west", GRAVITY_CHANGER_WEST);
+        register( "gravity_changer_east", GRAVITY_CHANGER_EAST);
 
 
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_down_aoe"), GRAVITY_CHANGER_DOWN_AOE);
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_up_aoe"), GRAVITY_CHANGER_UP_AOE);
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_north_aoe"), GRAVITY_CHANGER_NORTH_AOE);
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_south_aoe"), GRAVITY_CHANGER_SOUTH_AOE);
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_west_aoe"), GRAVITY_CHANGER_WEST_AOE);
-        Registry.register(Registries.ITEM, GravityChangerMod.id( "gravity_changer_east_aoe"), GRAVITY_CHANGER_EAST_AOE);
+        register( "gravity_changer_down_aoe", GRAVITY_CHANGER_DOWN_AOE);
+        register( "gravity_changer_up_aoe", GRAVITY_CHANGER_UP_AOE);
+        register( "gravity_changer_north_aoe", GRAVITY_CHANGER_NORTH_AOE);
+        register( "gravity_changer_south_aoe", GRAVITY_CHANGER_SOUTH_AOE);
+        register( "gravity_changer_west_aoe", GRAVITY_CHANGER_WEST_AOE);
+        register( "gravity_changer_east_aoe", GRAVITY_CHANGER_EAST_AOE);
+    }
+
+    private static void register(String name, Item item) {
+        Registry.register(Registries.ITEM, GravityChangerMod.id(name), item);
     }
 }
