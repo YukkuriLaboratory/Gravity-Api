@@ -1,9 +1,32 @@
 package com.fusionflux.gravity_api.util;
 
 import com.fusionflux.gravity_api.api.RotationParameters;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.util.math.Direction;
 
+import java.util.Optional;
+
 public class Gravity {
+    public static final PacketCodec<PacketByteBuf, Gravity> PACKET_CODEC = PacketCodec.tuple(
+            Direction.PACKET_CODEC, Gravity::direction,
+            PacketCodecs.INT, Gravity::priority,
+            PacketCodecs.optional(PacketCodecs.DOUBLE), g -> Optional.of(g.strength()),
+            PacketCodecs.INT, Gravity::duration,
+            PacketCodecs.STRING, Gravity::source,
+            PacketCodecs.optional(RotationParameters.PACKET_CODEC), g -> Optional.of(g.rotationParameters()),
+            (direction, priority, strengthOptional, duration, source, rotationParametersOptional) ->
+                    new Gravity(
+                            direction,
+                            priority,
+                            strengthOptional.orElse(1D),
+                            duration,
+                            source,
+                            rotationParametersOptional.orElse(new RotationParameters())
+                    )
+    );
+
     private final Direction direction;
     private final int priority;
     private int duration;
