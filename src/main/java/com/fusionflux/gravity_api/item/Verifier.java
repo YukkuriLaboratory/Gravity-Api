@@ -1,18 +1,15 @@
 package com.fusionflux.gravity_api.item;
 
 import com.fusionflux.gravity_api.GravityChangerMod;
-import com.fusionflux.gravity_api.util.Gravity;
 import com.fusionflux.gravity_api.util.packet.DefaultGravityPacket;
-import com.fusionflux.gravity_api.util.packet.UpdateGravityPacket;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import org.quiltmc.qsl.networking.api.PacketByteBufs;
 
 public class Verifier {
     public static Identifier FIELD_GRAVITY_SOURCE = GravityChangerMod.id( "changer_item");
@@ -20,7 +17,7 @@ public class Verifier {
     public static boolean check(ServerPlayerEntity player, PacketByteBuf info, DefaultGravityPacket packet) {
 
         if(packet.direction == null) return false;
-        BlockPos blockPos = info.readBlockPos();
+        BlockPos blockPos = info.readPos();
         World world = player.getWorld();
         if(world == null) return false;
         BlockEntity blockEntity = world.getBlockEntity(blockPos);
@@ -31,7 +28,7 @@ public class Verifier {
 
     public static PacketByteBuf packInfo(BlockPos block){
         var buf = PacketByteBufs.create();
-        buf.writeBlockPos(block);
+        buf.writePos(block);
         return buf;
     }
 
