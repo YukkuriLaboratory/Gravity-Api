@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.registry.HolderLookup;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
@@ -116,10 +117,10 @@ public class GravityDirectionComponent implements GravityComponent {
             EntityDimensions dimensions = entity.getDimensions(entity.getPose());
             if(newGravity.getOpposite() == oldGravity){
                 //In the center of the hit-box
-                relativeRotationCentre = new Vec3d(0, dimensions.height / 2, 0);
+                relativeRotationCentre = new Vec3d(0, dimensions.height() / 2, 0);
             }else {
                 //Around the ankles
-                relativeRotationCentre = new Vec3d(0, dimensions.width / 2, 0);
+                relativeRotationCentre = new Vec3d(0, dimensions.width() / 2, 0);
             }
         }
         return relativeRotationCentre;
@@ -131,7 +132,7 @@ public class GravityDirectionComponent implements GravityComponent {
             return;
         }
         
-        Box entityBoundingBox = entity.getBoundingBox();
+        Box entityBoundingBox = entity.getBounds();
         
         // for example, if gravity changed from down to north, move up
         // if gravity changed from down to up, also move up
@@ -338,7 +339,7 @@ public class GravityDirectionComponent implements GravityComponent {
     }
     
     @Override
-    public void readFromNbt(NbtCompound nbt) {
+    public void readFromNbt(NbtCompound nbt, HolderLookup.Provider provider) {
         //Store old values
         Direction oldDefaultGravity = defaultGravityDirection;
         double oldDefaultStrength = defaultGravityStrength;
@@ -377,7 +378,7 @@ public class GravityDirectionComponent implements GravityComponent {
     }
     
     @Override
-    public void writeToNbt(@NotNull NbtCompound nbt) {
+    public void writeToNbt(@NotNull NbtCompound nbt, HolderLookup.Provider provider) {
         int index = 0;
         for (Gravity temp : getGravity()) {
             if (temp.direction() != null && temp.source() != null) {

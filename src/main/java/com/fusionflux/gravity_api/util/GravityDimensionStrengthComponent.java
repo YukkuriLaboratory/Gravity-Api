@@ -1,6 +1,7 @@
 package com.fusionflux.gravity_api.util;
 
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.HolderLookup;
 import net.minecraft.world.World;
 
 public class GravityDimensionStrengthComponent implements GravityDimensionStrengthInterface {
@@ -26,12 +27,13 @@ public class GravityDimensionStrengthComponent implements GravityDimensionStreng
     }
 
     @Override
-    public void readFromNbt(NbtCompound tag) {
-        gravityStrength = tag.getDouble("DimensionGravityStrength");
+    public void readFromNbt(NbtCompound nbtCompound, HolderLookup.Provider provider) {
+        gravityStrength = nbtCompound.getDouble("DimensionGravityStrength");
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag) {
-        tag.putDouble("DimensionGravityStrength" , gravityStrength);
+    public void writeToNbt(NbtCompound nbtCompound, HolderLookup.Provider provider) {
+        nbtCompound.putDouble("DimensionGravityStrength" , gravityStrength);
+
     }
 }
