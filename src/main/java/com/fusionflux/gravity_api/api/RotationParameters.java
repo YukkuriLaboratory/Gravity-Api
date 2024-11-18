@@ -2,8 +2,19 @@ package com.fusionflux.gravity_api.api;
 
 import com.fusionflux.gravity_api.GravityChangerMod;
 import com.fusionflux.gravity_api.config.GravityChangerConfig;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.util.math.Direction;
 
 public class RotationParameters {
+    public static PacketCodec<ByteBuf, RotationParameters> PACKET_CODEC = PacketCodec.tuple(
+            PacketCodecs.BOOL, RotationParameters::rotateVelocity,
+            PacketCodecs.BOOL, RotationParameters::rotateView,
+            PacketCodecs.BOOL, RotationParameters::alternateCenter,
+            PacketCodecs.INT, RotationParameters::rotationTime,
+            RotationParameters::new
+    );
     private boolean rotateVelocity;
     private boolean rotateView;
     private boolean alternateCenter;
