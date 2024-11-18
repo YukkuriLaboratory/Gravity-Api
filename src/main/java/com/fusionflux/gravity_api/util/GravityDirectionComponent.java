@@ -23,10 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Objects;
+import java.util.*;
 
 public class GravityDirectionComponent implements GravityComponent {
     Direction gravityDirection = Direction.DOWN;
@@ -38,7 +35,7 @@ public class GravityDirectionComponent implements GravityComponent {
     RotationAnimation animation = new RotationAnimation();
     boolean needsInitialSync = false;
     
-    ArrayList<Gravity> gravityList = new ArrayList<>();
+    List<Gravity> gravityList = new ArrayList<>();
     
     private final Entity entity;
     
@@ -294,12 +291,12 @@ public class GravityDirectionComponent implements GravityComponent {
     }
     
     @Override
-    public ArrayList<Gravity> getGravity() {
+    public List<Gravity> getGravity() {
         return gravityList;
     }
 
     @Override
-    public void setGravity(ArrayList<Gravity> _gravityList, boolean initialGravity) {
+    public void setGravity(List<Gravity> _gravityList, boolean initialGravity) {
         Gravity highestBefore = getHighestPriority();
         gravityList = _gravityList;
         Gravity highestAfter = getHighestPriority();
@@ -343,7 +340,7 @@ public class GravityDirectionComponent implements GravityComponent {
         //Store old values
         Direction oldDefaultGravity = defaultGravityDirection;
         double oldDefaultStrength = defaultGravityStrength;
-        ArrayList<Gravity> oldList = gravityList;
+        List<Gravity> oldList = gravityList;
         boolean oldIsInverted = isInverted;
         //Load values from nbt
         if (nbt.contains("ListSize", NbtElement.INT_TYPE)) {
@@ -403,7 +400,7 @@ public class GravityDirectionComponent implements GravityComponent {
         if (vehicle != null) {
             addGravity(new Gravity(GravityChangerAPI.getGravityDirection(vehicle), 99999999, 2, "vehicle"), true);
         }
-        ArrayList<Gravity> gravityList = getGravity();
+        List<Gravity> gravityList = getGravity();
         Gravity highestBefore = getHighestPriority();
         if(gravityList.removeIf(g -> g.duration() == 0)){
             if (highestBefore != null) {
