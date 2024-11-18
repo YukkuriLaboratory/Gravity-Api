@@ -34,7 +34,7 @@ public abstract class CompatMath {
     }
 
     public static BlockPos fastBlockPos(Vec3d p){
-        return BlockPos.ofFloored(p.x,p.y,p.z);
+        return BlockPos.create(p.x,p.y,p.z);
     }
     private static float sin(float value) {
         return (float)Math.sin((double)value);
