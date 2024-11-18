@@ -14,16 +14,14 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import dev.onyxstudios.cca.api.v3.component.Component;
-import dev.onyxstudios.cca.api.v3.component.ComponentContainer;
-import dev.onyxstudios.cca.api.v3.component.ComponentKey;
-import dev.onyxstudios.cca.api.v3.component.ComponentProvider;
-import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import org.ladysnake.cca.api.v3.component.Component;
+import org.ladysnake.cca.api.v3.component.ComponentKey;
+import org.ladysnake.cca.api.v3.component.ComponentProvider;
+import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 
 public abstract class GravityChangerAPI {
     public static final ComponentKey<GravityComponent> GRAVITY_COMPONENT =
