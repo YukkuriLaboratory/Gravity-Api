@@ -99,22 +99,6 @@ public class GravityChannel<P extends GravityPacket> {
         ServerPlayNetworking.registerGlobalReceiver(channel, this::receiveFromClient);
     }
 
-    public static void initClient() {
-        DEFAULT_GRAVITY.registerClientReceiver();
-        UPDATE_GRAVITY.registerClientReceiver();
-        OVERWRITE_GRAVITY.registerClientReceiver();
-        INVERT_GRAVITY.registerClientReceiver();
-        DEFAULT_GRAVITY_STRENGTH.registerClientReceiver();
-    }
-
-    public static void initServer() {
-        DEFAULT_GRAVITY.registerServerReceiver();
-        UPDATE_GRAVITY.registerServerReceiver();
-        OVERWRITE_GRAVITY.registerServerReceiver();
-        INVERT_GRAVITY.registerServerReceiver();
-        DEFAULT_GRAVITY_STRENGTH.registerServerReceiver();
-    }
-
     @FunctionalInterface
     interface Factory<T extends GravityPacket> {
         T read(PacketByteBuf buf);
