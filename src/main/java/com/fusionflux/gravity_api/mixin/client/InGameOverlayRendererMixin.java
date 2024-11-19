@@ -5,7 +5,7 @@ import com.fusionflux.gravity_api.util.RotationUtil;
 
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.gui.hud.InGameOverlayRenderer;
+import net.minecraft.client.gui.hud.in_game.InGameOverlayRenderer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
