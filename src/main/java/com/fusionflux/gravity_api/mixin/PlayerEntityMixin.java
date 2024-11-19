@@ -280,12 +280,19 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         return RotationUtil.rotPlayerToWorld(original.call(attacker), attacker.getPitch(), gravityDirection).x;
     }
 
+//    @ModifyArgs(
+//            method = "spawnSweepAttackParticles",
+//            at = @At(
+//                    value = "INVOKE",
+//                    target = "",
+//                    ordinal = 0
+//            )
+//    )
     @ModifyArgs(
-            method = "spawnParticles",
+            method = "spawnSweepAttackParticles",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/World;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V",
-                    ordinal = 0
+                    target = "Lnet/minecraft/server/world/ServerWorld;spawnParticles(Lnet/minecraft/particle/ParticleEffect;DDDIDDDD)I"
             )
     )
     private void modify_addDeathParticless_addParticle_0(Args args) {

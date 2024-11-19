@@ -14,6 +14,7 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.*;
+import net.minecraft.util.random.RandomGenerator;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
@@ -113,7 +114,7 @@ public abstract class EntityMixin{
         return null;
     }
 
-    @Shadow @Final protected net.minecraft.util.math.random.Random random;
+    @Shadow @Final protected RandomGenerator random;
 
     @Inject(
             method = "calculateBoundingBox",
@@ -135,11 +136,11 @@ public abstract class EntityMixin{
     }
 
     @Inject(
-            method = "calculateBoundsForPose",
+            method = "calculateBoundingBox",
             at = @At("RETURN"),
             cancellable = true
     )
-    private void inject_calculateBoundsForPose(EntityPose pos, CallbackInfoReturnable<Box> cir) {
+    private void inject_calculateBoundsForPose(CallbackInfoReturnable<Box> cir) {
         Direction gravityDirection = GravityChangerAPI.getGravityDirection((Entity)(Object)this);
         if (gravityDirection == Direction.DOWN) return;
 
@@ -356,10 +357,12 @@ public abstract class EntityMixin{
     }
 
     @ModifyArgs(
-            method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;",
+//            method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;",
+            method = "adjustMovementForCollisions",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/util/math/Box;offset(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Box;",
+//                    target = "Lnet/minecraft/util/math/Box;offset(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Box;",
+                    target = "Lnet/minecraft/util/math/Box;offset(DDD)Lnet/minecraft/util/math/Box;",
                     ordinal = 1
             )
     )
