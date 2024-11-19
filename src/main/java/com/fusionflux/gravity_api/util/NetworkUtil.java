@@ -24,6 +24,7 @@ public class NetworkUtil {
 
     //Access gravity component
 
+    // TODO fix
     public static Optional<GravityComponent> getGravityComponent(MinecraftClient client, int entityId){
         if(client.world == null) return Optional.empty();
         Entity entity = client.world.getEntityById(entityId);
