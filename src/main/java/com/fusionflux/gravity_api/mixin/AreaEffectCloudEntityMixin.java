@@ -32,8 +32,6 @@ public abstract class AreaEffectCloudEntityMixin extends Entity{
 
     @Shadow public abstract ParticleEffect getParticleType();
 
-    @Shadow public abstract int getColor();
-
     @Shadow private int duration;
     @Shadow private int waitTime;
 
@@ -44,8 +42,6 @@ public abstract class AreaEffectCloudEntityMixin extends Entity{
     @Shadow public abstract void setRadius(float radius);
 
     @Shadow @Final private Map<Entity, Integer> affectedEntities;
-    @Shadow private Potion potion;
-    @Shadow @Final private List<StatusEffectInstance> effects;
     @Shadow private int reapplicationDelay;
 
     @Shadow @Nullable public abstract LivingEntity getOwner();
