@@ -8,24 +8,25 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.util.Identifier;
 
 import static com.fusionflux.gravity_api.util.NetworkUtil.*;
 
-public class GravityChannel<P extends GravityPacket> {
+public class GravityChannel<P extends BasePacketPayload> {
     // TODO rewrite all
-    public static GravityChannel<OverwriteGravityPacket> OVERWRITE_GRAVITY = new GravityChannel<>(OverwriteGravityPacket::new, GravityChangerMod.id("overwrite_gravity_list"));
+    public static GravityChannel<OverwriteGravityPacket> OVERWRITE_GRAVITY = new GravityChannel<>(OverwriteGravityPacket.PACKET_CODEC, GravityChangerMod.id("overwrite_gravity_list"));
     public static GravityChannel<UpdateGravityPacket> UPDATE_GRAVITY = new GravityChannel<>(UpdateGravityPacket::new, GravityChangerMod.id("update_gravity_list"));
     public static GravityChannel<DefaultGravityPacket> DEFAULT_GRAVITY = new GravityChannel<>(DefaultGravityPacket::new, GravityChangerMod.id("default_gravity"));
     public static GravityChannel<DefaultGravityStrengthPacket> DEFAULT_GRAVITY_STRENGTH = new GravityChannel<>(DefaultGravityStrengthPacket::new, GravityChangerMod.id("default_gravity_strength"));
     public static GravityChannel<InvertGravityPacket> INVERT_GRAVITY = new GravityChannel<>(InvertGravityPacket::new, GravityChangerMod.id("inverted"));
 
-    private final Factory<P> packetFactory;
+    private final PacketCodec<PacketByteBuf, P> codec;
     private final Identifier channel;
     private final GravityVerifierRegistry<P> gravityVerifierRegistry;
 
-    GravityChannel(Factory<P> _packetFactory, Identifier _channel){
-        packetFactory = _packetFactory;
+    GravityChannel(PacketCodec<PacketByteBuf, P> _codec, Identifier _channel){
+        codec = _codec;
         channel = _channel;
         gravityVerifierRegistry = new GravityVerifierRegistry<>();
     }
@@ -50,9 +51,10 @@ public class GravityChannel<P extends GravityPacket> {
         PacketByteBuf buf = PacketByteBufs.create();
 //        packet.write(buf);
         // TODO pass the value of entityId
-        buf.writeIdentifier(verifier);
-        buf.writeByteArray(verifierInfoBuf.array());
-        ClientPlayNetworking.send(channel, buf);
+//        buf.writeIdentifier(verifier);
+//        buf.writeByteArray(verifierInfoBuf.array());
+        codec.encode(buf, packet);
+        ClientPlayNetworking.send(packet);
     }
 
 //    public void receiveFromClient(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender){
