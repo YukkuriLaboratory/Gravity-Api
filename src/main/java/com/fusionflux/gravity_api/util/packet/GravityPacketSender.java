@@ -15,6 +15,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 
+@Deprecated
 public class GravityPacketSender {
     @Environment(EnvType.CLIENT)
     public static void sendToServer(CustomPayload payload) {

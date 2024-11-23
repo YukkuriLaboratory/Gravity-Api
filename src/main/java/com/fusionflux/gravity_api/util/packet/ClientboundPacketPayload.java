@@ -7,6 +7,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.network.ClientPlayerEntity;
 
+@Deprecated
 public non-sealed interface ClientboundPacketPayload extends BasePacketPayload {
     @Environment(EnvType.CLIENT)
     void handle(ClientPlayerEntity player, GravityComponent gc);

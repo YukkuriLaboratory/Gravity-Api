@@ -11,6 +11,7 @@ import net.minecraft.network.packet.payload.CustomPayload;
 
 import java.util.Locale;
 
+@Deprecated
 public enum GravityPackets implements BasePacketPayload.PacketTypeProvider {
     // Client to Server & Server to Client
     DEFAULT_GRAVITY_PACKET(DefaultGravityPacket.class, DefaultGravityPacket.PACKET_CODEC),

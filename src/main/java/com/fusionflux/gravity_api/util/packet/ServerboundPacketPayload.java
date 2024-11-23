@@ -5,6 +5,7 @@ import com.fusionflux.gravity_api.util.NetworkUtil;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+@Deprecated
 public non-sealed interface ServerboundPacketPayload extends BasePacketPayload {
     void handle(ServerPlayerEntity player, GravityComponent gc);
 

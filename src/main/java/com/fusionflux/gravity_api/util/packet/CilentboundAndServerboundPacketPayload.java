@@ -5,6 +5,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+@Deprecated
 public interface CilentboundAndServerboundPacketPayload extends ClientboundPacketPayload, ServerboundPacketPayload {
     @Override
     default void handle(ClientPlayerEntity player, GravityComponent gc) {
