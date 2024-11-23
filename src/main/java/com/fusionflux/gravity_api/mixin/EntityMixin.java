@@ -82,9 +82,6 @@ public abstract class EntityMixin{
     public abstract boolean hasPassengers();
 
     @Shadow
-    public abstract Box getBoundingBox();
-
-    @Shadow
     public abstract Vec3d getPos();
 
 
@@ -115,6 +112,8 @@ public abstract class EntityMixin{
     }
 
     @Shadow @Final protected RandomGenerator random;
+
+    @Shadow public abstract Box getBounds();
 
     @Inject(
             method = "calculateBoundingBox",
@@ -188,7 +187,7 @@ public abstract class EntityMixin{
     }
 
     @Inject(
-            method = "getCameraPosVec",
+            method = "getLerpedEyePos",
             at = @At("HEAD"),
             cancellable = true
     )
@@ -346,8 +345,8 @@ public abstract class EntityMixin{
             method = "adjustMovementForCollisions(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/util/math/Box;offset(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Box;",
-                    ordinal = 0
+//                    target = "Lnet/minecraft/util/math/Box;offset(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Box;"
+                    target = "Lnet/minecraft/util/math/Box;offset(DDD)Lnet/minecraft/util/math/Box;"
             )
     )
     private void redirect_adjustMovementForCollisions_offset_0(Args args) {
@@ -362,8 +361,7 @@ public abstract class EntityMixin{
             at = @At(
                     value = "INVOKE",
 //                    target = "Lnet/minecraft/util/math/Box;offset(Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Box;",
-                    target = "Lnet/minecraft/util/math/Box;offset(DDD)Lnet/minecraft/util/math/Box;",
-                    ordinal = 1
+                    target = "Lnet/minecraft/util/math/Box;offset(DDD)Lnet/minecraft/util/math/Box;"
             )
     )
     private void redirect_adjustMovementForCollisions_offset_1(Args args) {
@@ -555,7 +553,7 @@ public abstract class EntityMixin{
         BlockPos blockPos = CompatMath.fastBlockPos(floorPos);
         BlockState blockState = this.world.getBlockState(blockPos);
         if (blockState.getRenderType() != BlockRenderType.INVISIBLE) {
-            Vec3d particlePos = this.getPos().add(RotationUtil.vecPlayerToWorld((this.random.nextDouble() - 0.5D) * (double) this.dimensions.width, 0.1D, (this.random.nextDouble() - 0.5D) * (double) this.dimensions.width, gravityDirection));
+            Vec3d particlePos = this.getPos().add(RotationUtil.vecPlayerToWorld((this.random.nextDouble() - 0.5D) * (double) this.dimensions.width(), 0.1D, (this.random.nextDouble() - 0.5D) * (double) this.dimensions.width(), gravityDirection));
             Vec3d playerVelocity = this.getVelocity();
             Vec3d particleVelocity = RotationUtil.vecPlayerToWorld(playerVelocity.x * -4.0D, 1.5D, playerVelocity.z * -4.0D, gravityDirection);
             this.world.addParticle(new BlockStateParticleEffect(ParticleTypes.BLOCK, blockState), particlePos.x, particlePos.y, particlePos.z, particleVelocity.x, particleVelocity.y, particleVelocity.z);
@@ -568,8 +566,7 @@ public abstract class EntityMixin{
                     value = "INVOKE_ASSIGN",
                     target = "Lnet/minecraft/entity/Entity;getVelocity()Lnet/minecraft/util/math/Vec3d;",
                     ordinal = 0
-            ),
-            ordinal = 1
+            )
     )
     private Vec3d modify_updateMovementInFluid_Vec3d_0(Vec3d vec3d) {
         Direction gravityDirection = GravityChangerAPI.getGravityDirection((Entity)(Object)this);
@@ -614,7 +611,7 @@ public abstract class EntityMixin{
 
         if (!this.isConnectedThroughVehicle(entity)) {
             if (!entity.noClip && !this.noClip) {
-                Vec3d entityOffset = entity.getBoundingBox().getCenter().subtract(this.getBoundingBox().getCenter());
+                Vec3d entityOffset = entity.getBounds().getCenter().subtract(this.getBounds().getCenter());
 
                 {
                     Vec3d playerEntityOffset = RotationUtil.vecWorldToPlayer(entityOffset, gravityDirection);
