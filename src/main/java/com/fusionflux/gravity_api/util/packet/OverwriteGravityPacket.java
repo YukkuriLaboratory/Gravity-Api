@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
+@Deprecated
 public class OverwriteGravityPacket extends GravityPacket implements CilentboundAndServerboundPacketPayload {
     public static final PacketCodec<PacketByteBuf, OverwriteGravityPacket> PACKET_CODEC = PacketCodec.tuple(
             PacketCodecs.INT, p -> p.entityId,

@@ -8,6 +8,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 
+@Deprecated
 public class InvertGravityPacket extends GravityPacket implements CilentboundAndServerboundPacketPayload {
     public static final PacketCodec<PacketByteBuf, InvertGravityPacket> PACKET_CODEC = PacketCodec.tuple(
             PacketCodecs.INT, p -> p.entityId,

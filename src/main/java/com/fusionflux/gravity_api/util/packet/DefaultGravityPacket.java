@@ -9,6 +9,7 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.util.math.Direction;
 
+@Deprecated
 public class DefaultGravityPacket extends GravityPacket implements CilentboundAndServerboundPacketPayload {
     public static final PacketCodec<PacketByteBuf, DefaultGravityPacket> PACKET_CODEC = PacketCodec.tuple(
             PacketCodecs.INT, p -> p.entityId,
