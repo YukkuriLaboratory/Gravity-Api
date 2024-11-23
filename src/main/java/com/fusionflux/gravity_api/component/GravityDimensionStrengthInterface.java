@@ -1,4 +1,4 @@
-package com.fusionflux.gravity_api.util;
+package com.fusionflux.gravity_api.component;
 
 import org.ladysnake.cca.api.v3.component.Component;
 import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;

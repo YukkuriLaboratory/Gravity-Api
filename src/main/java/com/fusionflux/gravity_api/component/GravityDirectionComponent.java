@@ -1,15 +1,14 @@
-package com.fusionflux.gravity_api.util;
+package com.fusionflux.gravity_api.component;
 
-import com.fusionflux.gravity_api.GravityChangerMod;
 import com.fusionflux.gravity_api.RotationAnimation;
 import com.fusionflux.gravity_api.api.GravityChangerAPI;
 import com.fusionflux.gravity_api.api.RotationParameters;
 import com.fusionflux.gravity_api.config.GravityChangerConfig;
+import com.fusionflux.gravity_api.util.*;
 import net.minecraft.entity.AreaEffectCloudEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.decoration.EndCrystalEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.*;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;

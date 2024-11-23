@@ -2,8 +2,7 @@ package com.fusionflux.gravity_api.util.packet;
 
 import com.fusionflux.gravity_api.api.RotationParameters;
 import com.fusionflux.gravity_api.util.Gravity;
-import com.fusionflux.gravity_api.util.GravityComponent;
-import com.fusionflux.gravity_api.util.NetworkUtil;
+import com.fusionflux.gravity_api.component.GravityComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.codec.PacketCodec;

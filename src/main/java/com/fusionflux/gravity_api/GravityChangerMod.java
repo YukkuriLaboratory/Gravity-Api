@@ -5,7 +5,7 @@ import com.fusionflux.gravity_api.config.GravityChangerConfig;
 import com.fusionflux.gravity_api.item.ModItems;
 import com.fusionflux.gravity_api.item.Verifier;
 import com.fusionflux.gravity_api.util.GravityChannel;
-import com.fusionflux.gravity_api.util.GravityComponent;
+import com.fusionflux.gravity_api.component.GravityComponent;
 import com.fusionflux.gravity_api.util.packet.GravityPackets;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;

@@ -1,4 +1,4 @@
-package com.fusionflux.gravity_api.util;
+package com.fusionflux.gravity_api.component;
 
 import com.fusionflux.gravity_api.GravityChangerMod;
 import org.ladysnake.cca.api.v3.component.ComponentKey;

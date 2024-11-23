@@ -1,6 +1,8 @@
 package com.fusionflux.gravity_api.util;
 
 import com.fusionflux.gravity_api.GravityChangerMod;
+import com.fusionflux.gravity_api.component.GravityComponent;
+import com.fusionflux.gravity_api.component.GravityDirectionComponent;
 import com.fusionflux.gravity_api.config.GravityChangerConfig;
 import net.minecraft.entity.Entity;
 import org.ladysnake.cca.api.v3.component.ComponentKey;

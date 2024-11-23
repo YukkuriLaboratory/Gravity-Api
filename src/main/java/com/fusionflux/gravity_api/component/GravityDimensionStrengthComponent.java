@@ -1,4 +1,4 @@
-package com.fusionflux.gravity_api.util;
+package com.fusionflux.gravity_api.component;
 
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.HolderLookup;

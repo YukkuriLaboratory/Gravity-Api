@@ -1,6 +1,7 @@
 package com.fusionflux.gravity_api.util;
 
 import com.fusionflux.gravity_api.api.GravityChangerAPI;
+import com.fusionflux.gravity_api.component.GravityComponent;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import org.jetbrains.annotations.NotNull;

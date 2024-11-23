@@ -1,6 +1,6 @@
 package com.fusionflux.gravity_api.util.packet;
 
-import com.fusionflux.gravity_api.util.GravityComponent;
+import com.fusionflux.gravity_api.component.GravityComponent;
 import com.fusionflux.gravity_api.util.NetworkUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
