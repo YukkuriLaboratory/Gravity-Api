@@ -6,6 +6,7 @@ import com.fusionflux.gravity_api.item.ModItems;
 import com.fusionflux.gravity_api.item.Verifier;
 import com.fusionflux.gravity_api.util.GravityChannel;
 import com.fusionflux.gravity_api.util.GravityComponent;
+import com.fusionflux.gravity_api.util.packet.GravityPackets;
 import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -52,6 +53,7 @@ public class GravityChangerMod implements ModInitializer {
         ModItems.init();
         Registry.register(Registries.ITEM_GROUP, id("general"), GravityChangerGroup);
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> GravityCommand.register(dispatcher));
+        GravityPackets.registerPackets();
     }
 
     public static Identifier id(String path) {
