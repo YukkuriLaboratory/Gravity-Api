@@ -1,4 +1,4 @@
-package com.fusionflux.gravity_api;
+package com.fusionflux.gravity_api.animation;
 
 import com.fusionflux.gravity_api.util.QuaternionUtil;
 import com.fusionflux.gravity_api.util.RotationUtil;

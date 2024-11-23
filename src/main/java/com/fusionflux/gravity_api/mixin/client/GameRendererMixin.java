@@ -1,6 +1,6 @@
 package com.fusionflux.gravity_api.mixin.client;
 
-import com.fusionflux.gravity_api.RotationAnimation;
+import com.fusionflux.gravity_api.animation.RotationAnimation;
 import com.fusionflux.gravity_api.api.GravityChangerAPI;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;

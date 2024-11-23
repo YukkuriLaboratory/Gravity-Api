@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import com.fusionflux.gravity_api.GravityChangerMod;
-import com.fusionflux.gravity_api.RotationAnimation;
+import com.fusionflux.gravity_api.animation.RotationAnimation;
 import com.fusionflux.gravity_api.component.GravityComponent;
 import com.fusionflux.gravity_api.component.GravityDimensionStrengthInterface;
 import com.fusionflux.gravity_api.entity.EntityTags;

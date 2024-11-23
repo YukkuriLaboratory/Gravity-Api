@@ -1,6 +1,6 @@
 package com.fusionflux.gravity_api.component;
 
-import com.fusionflux.gravity_api.RotationAnimation;
+import com.fusionflux.gravity_api.animation.RotationAnimation;
 import com.fusionflux.gravity_api.api.GravityChangerAPI;
 import com.fusionflux.gravity_api.api.RotationParameters;
 import com.fusionflux.gravity_api.config.GravityChangerConfig;

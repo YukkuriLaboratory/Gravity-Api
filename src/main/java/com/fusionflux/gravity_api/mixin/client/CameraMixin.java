@@ -2,7 +2,7 @@ package com.fusionflux.gravity_api.mixin.client;
 
 import java.util.Optional;
 
-import com.fusionflux.gravity_api.RotationAnimation;
+import com.fusionflux.gravity_api.animation.RotationAnimation;
 import com.fusionflux.gravity_api.api.GravityChangerAPI;
 import com.fusionflux.gravity_api.util.CompatMath;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
