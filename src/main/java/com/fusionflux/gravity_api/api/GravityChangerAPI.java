@@ -62,9 +62,9 @@ public abstract class GravityChangerAPI {
 
     public static ArrayList<Gravity> getGravityList(Entity entity) {
         if (EntityTags.canChangeGravity(entity)) {
-            return maybeGetSafe(GRAVITY_COMPONENT, entity).map(GravityComponent::getGravity).orElse(new ArrayList<Gravity>());
+            return (ArrayList<Gravity>) maybeGetSafe(GRAVITY_COMPONENT, entity).map(GravityComponent::getGravity).orElse(new ArrayList<>());
         }
-        return new ArrayList<Gravity>();
+        return new ArrayList<>();
     }
 
     public static Direction getPrevGravtityDirection(Entity entity) {
@@ -137,7 +137,7 @@ public abstract class GravityChangerAPI {
             if (EntityTags.canChangeGravity(entity)) {
                 maybeGetSafe(GRAVITY_COMPONENT, entity).ifPresent(gc -> {
                     gc.addGravity(gravity, false);
-                    GravityChannel.UPDATE_GRAVITY.sendToClient(entity, new UpdateGravityPacket(gravity, false), NetworkUtil.PacketMode.EVERYONE);
+                    GravityChannel.UPDATE_GRAVITY.sendToClient(entity, new UpdateGravityPacket(entity.getId(), gravity, false), NetworkUtil.PacketMode.EVERYONE);
                 });
             }
         }
@@ -149,7 +149,7 @@ public abstract class GravityChangerAPI {
             if (EntityTags.canChangeGravity(entity)) {
                 maybeGetSafe(GRAVITY_COMPONENT, entity).ifPresent(gc -> {
                     gc.addGravity(gravity, false);
-                    GravityChannel.UPDATE_GRAVITY.sendToServer(new UpdateGravityPacket(gravity, false), verifier, verifierInfo);
+                    GravityChannel.UPDATE_GRAVITY.sendToServer(new UpdateGravityPacket(entity.getId(), gravity, false), verifier, verifierInfo);
                 });
             }
         }
@@ -174,7 +174,7 @@ public abstract class GravityChangerAPI {
             if (EntityTags.canChangeGravity(entity)) {
                 maybeGetSafe(GRAVITY_COMPONENT, entity).ifPresent(gc -> {
                     gc.setGravity(gravity, false);
-                    GravityChannel.OVERWRITE_GRAVITY.sendToClient(entity, new OverwriteGravityPacket(gravity, false), NetworkUtil.PacketMode.EVERYONE);
+                    GravityChannel.OVERWRITE_GRAVITY.sendToClient(entity, new OverwriteGravityPacket(entity.getId(), gravity, false), NetworkUtil.PacketMode.EVERYONE);
                 });
             }
         }
@@ -185,7 +185,7 @@ public abstract class GravityChangerAPI {
             if (EntityTags.canChangeGravity(entity)) {
                 maybeGetSafe(GRAVITY_COMPONENT, entity).ifPresent(gc -> {
                     gc.setGravity(gravity, false);
-                    GravityChannel.OVERWRITE_GRAVITY.sendToServer(new OverwriteGravityPacket(gravity, false), verifier, verifierInfo);
+                    GravityChannel.OVERWRITE_GRAVITY.sendToServer(new OverwriteGravityPacket(entity.getId(), gravity, false), verifier, verifierInfo);
                 });
             }
         }
@@ -200,7 +200,7 @@ public abstract class GravityChangerAPI {
             if (EntityTags.canChangeGravity(entity)) {
                 maybeGetSafe(GRAVITY_COMPONENT, entity).ifPresent(gc -> {
                     gc.invertGravity(isInverted, rotationParameters, false);
-                    GravityChannel.INVERT_GRAVITY.sendToClient(entity, new InvertGravityPacket(isInverted, rotationParameters, false), NetworkUtil.PacketMode.EVERYONE);
+                    GravityChannel.INVERT_GRAVITY.sendToClient(entity, new InvertGravityPacket(entity.getId(), isInverted, rotationParameters, false), NetworkUtil.PacketMode.EVERYONE);
                 });
             }
         }
@@ -211,7 +211,7 @@ public abstract class GravityChangerAPI {
             if (EntityTags.canChangeGravity(entity)) {
                 maybeGetSafe(GRAVITY_COMPONENT, entity).ifPresent(gc -> {
                     gc.setDefaultGravityStrength(strength);
-                    GravityChannel.DEFAULT_GRAVITY_STRENGTH.sendToClient(entity, new DefaultGravityStrengthPacket(strength), NetworkUtil.PacketMode.EVERYONE);
+                    GravityChannel.DEFAULT_GRAVITY_STRENGTH.sendToClient(entity, new DefaultGravityStrengthPacket(entity.getId(), strength), NetworkUtil.PacketMode.EVERYONE);
                 });
             }
         }
@@ -227,7 +227,7 @@ public abstract class GravityChangerAPI {
             if (EntityTags.canChangeGravity(entity)) {
                 maybeGetSafe(GRAVITY_COMPONENT, entity).ifPresent(gc -> {
                     gc.invertGravity(isInverted, rotationParameters, false);
-                    GravityChannel.INVERT_GRAVITY.sendToServer(new InvertGravityPacket(isInverted, rotationParameters, false), verifier, verifierInfo);
+                    GravityChannel.INVERT_GRAVITY.sendToServer(new InvertGravityPacket(entity.getId(), isInverted, rotationParameters, false), verifier, verifierInfo);
                 });
             }
         }
@@ -242,7 +242,7 @@ public abstract class GravityChangerAPI {
             if (EntityTags.canChangeGravity(entity)) {
                 maybeGetSafe(GRAVITY_COMPONENT, entity).ifPresent(gc -> {
                     gc.clearGravity(rotationParameters, false);
-                    GravityChannel.OVERWRITE_GRAVITY.sendToClient(entity, new OverwriteGravityPacket( new ArrayList<>(), false), NetworkUtil.PacketMode.EVERYONE);
+                    GravityChannel.OVERWRITE_GRAVITY.sendToClient(entity, new OverwriteGravityPacket(entity.getId(), new ArrayList<>(), false), NetworkUtil.PacketMode.EVERYONE);
                 });
             }
         }
@@ -253,7 +253,7 @@ public abstract class GravityChangerAPI {
             if (EntityTags.canChangeGravity(entity)) {
                 maybeGetSafe(GRAVITY_COMPONENT, entity).ifPresent(gc -> {
                     gc.clearGravity(rotationParameters, false);
-                    GravityChannel.OVERWRITE_GRAVITY.sendToServer(new OverwriteGravityPacket(new ArrayList<>(), false), verifier, verifierInfo);
+                    GravityChannel.OVERWRITE_GRAVITY.sendToServer(new OverwriteGravityPacket(entity.getId(), new ArrayList<>(), false), verifier, verifierInfo);
                 });
             }
         }
@@ -273,7 +273,7 @@ public abstract class GravityChangerAPI {
             if (EntityTags.canChangeGravity(entity)) {
                 maybeGetSafe(GRAVITY_COMPONENT, entity).ifPresent(gc -> {
                     gc.setDefaultGravityDirection(gravityDirection, rotationParameters, false);
-                    GravityChannel.DEFAULT_GRAVITY.sendToClient(entity, new DefaultGravityPacket(gravityDirection, rotationParameters, false), NetworkUtil.PacketMode.EVERYONE);
+                    GravityChannel.DEFAULT_GRAVITY.sendToClient(entity, new DefaultGravityPacket(entity.getId(), gravityDirection, rotationParameters, false), NetworkUtil.PacketMode.EVERYONE);
                 });
             }
         }
@@ -284,7 +284,7 @@ public abstract class GravityChangerAPI {
             if (EntityTags.canChangeGravity(entity)) {
                 maybeGetSafe(GRAVITY_COMPONENT, entity).ifPresent(gc -> {
                     gc.setDefaultGravityDirection(gravityDirection, rotationParameters, false);
-                    GravityChannel.DEFAULT_GRAVITY.sendToServer(new DefaultGravityPacket(gravityDirection, rotationParameters, false), verifier, verifierInfo);
+                    GravityChannel.DEFAULT_GRAVITY.sendToServer(new DefaultGravityPacket(entity.getId(), gravityDirection, rotationParameters, false), verifier, verifierInfo);
                 });
             }
         }
