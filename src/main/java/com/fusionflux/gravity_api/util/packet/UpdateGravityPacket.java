@@ -1,7 +1,7 @@
 package com.fusionflux.gravity_api.util.packet;
 
 import com.fusionflux.gravity_api.api.RotationParameters;
-import com.fusionflux.gravity_api.util.Gravity;
+import com.fusionflux.gravity_api.gravity.Gravity;
 import com.fusionflux.gravity_api.component.GravityComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketByteBuf;

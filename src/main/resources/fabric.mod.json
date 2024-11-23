@@ -20,7 +20,9 @@
   "entrypoints": {
     "main": ["com.fusionflux.gravity_api.GravityChangerMod"],
     "modmenu": ["com.fusionflux.gravity_api.config.ModMenuIntegration"],
-    "cardinal-components": ["com.fusionflux.gravity_api.util.GravityChangerComponents"]
+    "cardinal-components": [
+      "com.fusionflux.gravity_api.component.GravityChangerComponents"
+    ]
   },
   "mixins": [
     "gravity_api.mixins.json"
