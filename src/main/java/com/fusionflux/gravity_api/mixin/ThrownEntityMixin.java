@@ -21,12 +21,12 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 @Mixin(ThrownEntity.class)
 public abstract class ThrownEntityMixin{
 
-    @Shadow protected abstract float getGravity();
-
     /*@Override
     public Direction gravitychanger$getAppliedGravityDirection() {
         return GravityChangerAPI.getGravityDirection((ThrownEntity)(Object)this);
     }*/
+
+    @Shadow protected abstract double getDefaultGravity();
 
     @ModifyVariable(
             method = "tick",
@@ -37,9 +37,9 @@ public abstract class ThrownEntityMixin{
     )
     public Vec3d tick(Vec3d modify){
         //if(this instanceof RotatableEntityAccessor) {
-            modify = new Vec3d(modify.x, modify.y + this.getGravity(), modify.z);
+            modify = new Vec3d(modify.x, modify.y + this.getDefaultGravity(), modify.z);
             modify = RotationUtil.vecWorldToPlayer(modify, GravityChangerAPI.getGravityDirection((ThrownEntity)(Object)this));
-            modify = new Vec3d(modify.x, modify.y - this.getGravity(), modify.z);
+            modify = new Vec3d(modify.x, modify.y - this.getDefaultGravity(), modify.z);
             modify = RotationUtil.vecPlayerToWorld(modify, GravityChangerAPI.getGravityDirection((ThrownEntity)(Object)this));
        // }
         return  modify;
@@ -63,8 +63,8 @@ public abstract class ThrownEntityMixin{
         args.set(3, pos.z);
     }
 
-    @ModifyReturnValue(method = "getGravity", at = @At("RETURN"))
-    private float multiplyGravity(float original) {
-        return original * (float)GravityChangerAPI.getGravityStrength(((Entity) (Object) this));
+    @ModifyReturnValue(method = "getDefaultGravity", at = @At("RETURN"))
+    private double multiplyGravity(double original) {
+        return original * GravityChangerAPI.getGravityStrength(((Entity) (Object) this));
     }
 }

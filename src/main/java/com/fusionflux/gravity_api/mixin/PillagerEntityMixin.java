@@ -7,6 +7,7 @@ import net.minecraft.entity.CrossbowUser;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PillagerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -15,20 +16,17 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+import java.util.Objects;
+
 @Mixin(PillagerEntity.class)
 public abstract class PillagerEntityMixin implements CrossbowUser {
-    @Redirect(
-            method = "shoot",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/mob/PillagerEntity;shoot(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/projectile/ProjectileEntity;FF)V",
-                    ordinal = 0
-            )
-    )
-    private void redirect_shoot_shoot_0(PillagerEntity pillagerEntity, LivingEntity entity, LivingEntity target, ProjectileEntity projectile, float multishotSpray, float speed) {
+    @Override
+    public void shoot(LivingEntity entity, float speed) {
+        var target = getTarget();
+        Objects.requireNonNull(target);
         Direction gravityDirection = GravityChangerAPI.getGravityDirection(target);
         if(gravityDirection == Direction.DOWN) {
-            this.shoot(entity, target, projectile, multishotSpray, speed);
+            this.shoot(entity, speed);
             return;
         }
 
